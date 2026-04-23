@@ -28,7 +28,7 @@ function ReviewNotice() {
     const updateStatus = async (id, status) => {
         try {
             const res = await fetch(`${API_URL}/notices/${id}/status`, {
-                method: "PATCH",
+                method: "PUT",
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json"

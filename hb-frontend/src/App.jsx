@@ -10,6 +10,8 @@ import ReviewNotice from "./components/reviewNotice.jsx";
 import AdminPanel from "./components/admin.jsx";
 import NavBar from "./components/Nav.jsx";
 
+const API_URL = "https://api.helsebygg.flameys.net/api/v1";
+
 function RequireAuth({ user, children }) {
     if (!user) return <Navigate to="/login" replace />;
     return children;

@@ -24,7 +24,18 @@ function RequireRole({ user, roles, children }) {
 export default function App() {
     const [user, setUser] = useState(null);
 
-    const logout = () => setUser(null);
+    const logout = async () => {
+        try {
+            await fetch(`${API_URL}/auth/logout`, {
+                method: "POST",
+                credentials: "include"
+            });
+        } catch (err) {
+            console.error("Logout failed:", err);
+        } finally {
+            setUser(null);
+        }
+    };
 
     return (
         <BrowserRouter>
@@ -39,7 +50,7 @@ export default function App() {
                             path="/"
                             element={
                                 <RequireAuth user={user}>
-                                    <Home />
+                                    <Home user={user} />
                                 </RequireAuth>
                             }
                         />

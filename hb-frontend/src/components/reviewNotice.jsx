@@ -8,7 +8,7 @@ function ReviewNotice() {
 
     const fetchNotices = async () => {
         try {
-            const res = await fetch(`${API_URL}/notice`, {
+            const res = await fetch(`${API_URL}/notices`, {
                 credentials: "include"
             });
 
@@ -27,7 +27,7 @@ function ReviewNotice() {
 
     const updateStatus = async (id, status) => {
         try {
-            const res = await fetch(`${API_URL}/notice/${id}/status`, {
+            const res = await fetch(`${API_URL}/notices/${id}/status`, {
                 method: "PATCH",
                 credentials: "include",
                 headers: {

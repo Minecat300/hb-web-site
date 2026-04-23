@@ -24,7 +24,7 @@ function SendNotice() {
         setLoading(true);
 
         try {
-            const res = await fetch(`${API_URL}/notice`, {
+            const res = await fetch(`${API_URL}/notices`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

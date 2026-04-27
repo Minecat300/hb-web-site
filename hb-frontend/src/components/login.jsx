@@ -11,40 +11,67 @@ function Login({ setUser }) {
         password: ""
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
-        const res = await fetch(`${API_URL}/auth/login`, {
-            credentials: "include",
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form)
-        });
+        try {
+            const res = await fetch(`${API_URL}/auth/login`, {
+                credentials: "include",
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form)
+            });
 
-        const data = await res.json();
+            const data = await res.json();
 
-        if (!res.ok) return alert(data.message);
+            if (!res.ok) throw new Error(data.message || "Login failed");
 
-        setUser({
-            username: data.username,
-            roles: data.roles || []
-        });
+            setUser({
+                username: data.username,
+                roles: data.roles || []
+            });
 
-        navigate("/");
+            navigate("/");
+
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-80">
-                <input name="username" onChange={handleChange} placeholder="Username" />
-                <input name="password" type="password" onChange={handleChange} placeholder="Password" />
+        <div className="login-page">
+            <form onSubmit={handleSubmit} className="login-card">
+                <h2 className="login-title">🔐 Login</h2>
 
-                <button className="bg-blue-500 text-white p-2 rounded">
-                    Login
+                <input
+                    name="username"
+                    onChange={handleChange}
+                    placeholder="Username"
+                    className="login-input"
+                />
+
+                <input
+                    name="password"
+                    type="password"
+                    onChange={handleChange}
+                    placeholder="Password"
+                    className="login-input"
+                />
+
+                <button
+                    className="btn-blue full"
+                    disabled={loading}
+                >
+                    {loading ? "Logging in..." : "Login"}
                 </button>
             </form>
         </div>

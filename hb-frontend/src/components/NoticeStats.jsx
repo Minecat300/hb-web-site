@@ -2,24 +2,50 @@ import { useState } from "react";
 
 const API_URL = "https://api.helsebygg.flameys.net/api/v1";
 
+const CATEGORIES = [
+    "Patient Injury",
+    "Medication",
+    "Routine Violation"
+];
+
+const MONTHS = [
+    { value: "01", label: "January" },
+    { value: "02", label: "February" },
+    { value: "03", label: "March" },
+    { value: "04", label: "April" },
+    { value: "05", label: "May" },
+    { value: "06", label: "June" },
+    { value: "07", label: "July" },
+    { value: "08", label: "August" },
+    { value: "09", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" }
+];
+
+function getYearOptions() {
+    const current = new Date().getFullYear();
+    return Array.from({ length: 5 }, (_, i) => current - i);
+}
+
 function NoticeStats() {
     const [month, setMonth] = useState("");
+    const [year, setYear] = useState("");
     const [category, setCategory] = useState("");
     const [total, setTotal] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const handleSearch = async () => {
-        if (!month || !category.trim()) {
-            return alert("Pick a month and category first!");
+        if (!month || !year || !category) {
+            return alert("Pick month, year, and category!");
         }
 
-        const [year, m] = month.split("-");
         setLoading(true);
         setTotal(null);
 
         try {
             const res = await fetch(
-                `${API_URL}/notice/count?category=${encodeURIComponent(category)}&year=${year}&month=${m}`,
+                `${API_URL}/notice/count?category=${encodeURIComponent(category)}&year=${year}&month=${month}`,
                 { credentials: "include" }
             );
 
@@ -36,32 +62,48 @@ function NoticeStats() {
         }
     };
 
-    const formatMonth = (value) => {
-        if (!value) return "";
-        const [y, m] = value.split("-");
-        return new Date(y, m - 1).toLocaleString(undefined, {
-            month: "long",
-            year: "numeric"
-        });
-    };
+    const selectedMonthLabel = MONTHS.find(m => m.value === month)?.label;
 
     return (
         <div className="card stats-card">
             <h2>📊 Notice Statistics</h2>
-            <p className="small">Check how many notices were created in a specific month and category.</p>
+            <p className="small">
+                Get a quick overview of notices by category and time.
+            </p>
 
             <div className="filter-row">
-                <input
-                    type="month"
-                    value={month}
-                    onChange={(e) => setMonth(e.target.value)}
-                />
+                {/* Month */}
+                <select value={month} onChange={(e) => setMonth(e.target.value)}>
+                    <option value="">Month</option>
+                    {MONTHS.map((m) => (
+                        <option key={m.value} value={m.value}>
+                            {m.label}
+                        </option>
+                    ))}
+                </select>
 
-                <input
-                    placeholder="Category (e.g. maintenance)"
+                {/* Year */}
+                <select value={year} onChange={(e) => setYear(e.target.value)}>
+                    <option value="">Year</option>
+                    {getYearOptions().map((y) => (
+                        <option key={y} value={y}>
+                            {y}
+                        </option>
+                    ))}
+                </select>
+
+                {/* Category */}
+                <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                />
+                >
+                    <option value="">Category</option>
+                    {CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                            {cat}
+                        </option>
+                    ))}
+                </select>
 
                 <button
                     className="btn-blue"
@@ -74,7 +116,7 @@ function NoticeStats() {
 
             {loading && (
                 <div className="stats-result">
-                    <span className="small">Fetching data...</span>
+                    <span className="small">Crunching numbers...</span>
                 </div>
             )}
 
@@ -82,11 +124,14 @@ function NoticeStats() {
                 <div className="stats-result">
                     <div className="stats-number">{total}</div>
                     <div className="stats-label">
-                        {total === 1 ? "notice" : "notices"} found in
+                        {total === 1 ? "notice" : "notices"} found
                     </div>
+
                     <div className="stats-meta">
                         <span className="badge">{category}</span>
-                        <span className="badge">{formatMonth(month)}</span>
+                        <span className="badge">
+                            {selectedMonthLabel} {year}
+                        </span>
                     </div>
                 </div>
             )}

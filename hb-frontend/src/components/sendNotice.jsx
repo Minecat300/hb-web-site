@@ -2,11 +2,17 @@ import { useState } from "react";
 
 const API_URL = "https://api.helsebygg.flameys.net/api/v1";
 
+const CATEGORIES = [
+    "Patient Injury",
+    "Medication",
+    "Routine Violation"
+];
+
 function SendNotice() {
     const [form, setForm] = useState({
         title: "",
         description: "",
-        topic: "",
+        category: "",
         status: "draft"
     });
 
@@ -21,10 +27,15 @@ function SendNotice() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!form.category) {
+            return alert("Please select a category");
+        }
+
         setLoading(true);
 
         try {
-            const res = await fetch(`${API_URL}/notices`, {
+            const res = await fetch(`${API_URL}/notice`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -42,7 +53,7 @@ function SendNotice() {
             setForm({
                 title: "",
                 description: "",
-                topic: "",
+                category: "",
                 status: "draft"
             });
 
@@ -75,12 +86,19 @@ function SendNotice() {
                     required
                 />
 
-                <input
-                    name="topic"
-                    value={form.topic}
+                <select
+                    name="category"
+                    value={form.category}
                     onChange={handleChange}
-                    placeholder="Topic (e.g. maintenance, alert)"
-                />
+                    required
+                >
+                    <option value="">Select category</option>
+                    {CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                            {cat}
+                        </option>
+                    ))}
+                </select>
 
                 <select
                     name="status"

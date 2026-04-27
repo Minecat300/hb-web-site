@@ -39,6 +39,7 @@ function ReviewNotice() {
             const data = await res.json();
             if (!res.ok) throw new Error(data.error);
 
+            // optimistic-ish refresh
             fetchNotices();
         } catch (err) {
             alert(err.message);
@@ -68,7 +69,9 @@ function ReviewNotice() {
                         </p>
 
                         <div className="notice-meta">
-                            <span>📌 {n.topic || "No topic"}</span>
+                            <span>
+                                📌 {n.category} • 🕒 {new Date(n.created_at).toLocaleString()}
+                            </span>
                         </div>
 
                         <div className="notice-actions">

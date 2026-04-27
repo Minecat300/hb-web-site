@@ -1406,3 +1406,99 @@ body.light ::-webkit-scrollbar-thumb {
 body.light ::-webkit-scrollbar-track {
     background: #f1f5f9;
 }
+
+/* ========================= */
+/* 🔧 LIGHT MODE FIX PATCH   */
+/* ========================= */
+
+/* FORCE TEXT COLORS */
+body.light,
+body.light h1,
+body.light h2,
+body.light h3,
+body.light p,
+body.light span,
+body.light div {
+    color: #0f172a;
+}
+
+/* NAV LINKS (duplicate overrides fix) */
+body.light nav,
+body.light .nav {
+    background: #ffffff !important;
+    color: #0f172a !important;
+}
+
+body.light nav a,
+body.light .nav-item {
+    color: #334155 !important;
+}
+
+body.light nav a:hover,
+body.light .nav-item:hover {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+/* BUTTON TEXT FIX */
+body.light button {
+    color: #0f172a;
+}
+
+body.light .btn-blue,
+body.light .btn-red,
+body.light .btn-green {
+    color: white !important;
+}
+
+/* INPUT TEXT FORCE */
+body.light input,
+body.light textarea,
+body.light select {
+    color: #0f172a !important;
+    background: #ffffff !important;
+}
+
+/* PLACEHOLDER */
+body.light input::placeholder,
+body.light textarea::placeholder {
+    color: #64748b !important;
+}
+
+/* NOTICE CARDS (duplicate rules override) */
+body.light .notice-item {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* USER CARDS */
+body.light .user-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* ADMIN CARDS */
+body.light .admin-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* HOME CARDS */
+body.light .home-card {
+    background: #ffffff !important;
+    color: #0f172a !important;
+}
+
+/* FIX DARK BACKGROUND LEFTOVERS */
+body.light .scroll-box,
+body.light .stats-result {
+    background: #f1f5f9 !important;
+}
+
+/* SELECT + FILTER ROW */
+body.light .filter-row select,
+body.light .filter-row button {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+}

@@ -657,3 +657,26 @@ select {
     font-size: 13px;
     color: #94a3b8;
 }
+
+.stats-card {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.stats-result {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.stats-number {
+    font-size: 48px;
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+.stats-label {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #94a3b8;
+}

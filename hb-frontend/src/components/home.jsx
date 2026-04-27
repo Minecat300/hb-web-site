@@ -29,10 +29,17 @@ function Home({ user }) {
                 </Link>
 
                 {(isAdmin || isManagement) && (
-                    <Link to="/review" className="home-card">
-                        <h3>👁 Review Notices</h3>
-                        <p>Approve and manage notices</p>
-                    </Link>
+                    <>
+                        <Link to="/review" className="home-card">
+                            <h3>👁 Review Notices</h3>
+                            <p>Approve and manage notices</p>
+                        </Link>
+
+                        <Link to="/review/stats" className="home-card">
+                            <h3>📊 Notice Stats</h3>
+                            <p>View notice statistics</p>
+                        </Link>
+                    </>
                 )}
 
                 {isAdmin && (

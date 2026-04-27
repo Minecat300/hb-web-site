@@ -50,7 +50,7 @@ function ReviewNotice() {
         if (!ok) return;
 
         try {
-            const res = await fetch(`${API_URL}/notice/${id}`, {
+            const res = await fetch(`${API_URL}/notices/${id}`, {
                 method: "DELETE",
                 credentials: "include"
             });

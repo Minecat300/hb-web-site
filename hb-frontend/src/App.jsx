@@ -7,6 +7,7 @@ import Login from "./components/login.jsx";
 import Home from "./components/home.jsx";
 import SendNotice from "./components/sendNotice.jsx";
 import ReviewNotice from "./components/reviewNotice.jsx";
+import NoticeStats from "./components/NoticeStats.jsx";
 import AdminPanel from "./components/admin.jsx";
 import NavBar from "./components/Nav.jsx";
 
@@ -72,6 +73,17 @@ export default function App() {
                                 <RequireAuth user={user}>
                                     <RequireRole user={user} roles={["admin", "management"]}>
                                         <ReviewNotice />
+                                    </RequireRole>
+                                </RequireAuth>
+                            }
+                        />
+
+                        <Route
+                            path="/review/stats"
+                            element={
+                                <RequireAuth user={user}>
+                                    <RequireRole user={user} roles={["admin", "management"]}>
+                                        <NoticeStats />
                                     </RequireRole>
                                 </RequireAuth>
                             }

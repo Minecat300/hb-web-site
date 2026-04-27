@@ -13,9 +13,14 @@ function NavBar({ user, logout }) {
                 <NavLink to="/send" className="nav-item">Send Notice</NavLink>
 
                 {(isAdmin || isManagement) && (
-                    <NavLink to="/review" className="nav-item">
-                        Review
-                    </NavLink>
+                    <>
+                        <NavLink to="/review" className="nav-item">
+                            Review
+                        </NavLink>
+                        <NavLink to="/review/stats" className="nav-item">
+                            Stats
+                        </NavLink>
+                    </>
                 )}
 
                 {isAdmin && (

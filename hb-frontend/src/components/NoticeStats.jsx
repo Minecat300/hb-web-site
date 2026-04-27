@@ -45,7 +45,7 @@ function NoticeStats() {
 
         try {
             const res = await fetch(
-                `${API_URL}/notice/count?category=${encodeURIComponent(category)}&year=${year}&month=${month}`,
+                `${API_URL}/notices/count?category=${encodeURIComponent(category)}&year=${year}&month=${month}`,
                 { credentials: "include" }
             );
 

@@ -9,28 +9,30 @@ function NavBar({ user, logout }) {
     const isManagement = user.roles.includes("management");
 
     const closeMenu = () => setOpen(false);
-
-    /* LOAD SAVED THEME */
+    
     useEffect(() => {
         const saved = localStorage.getItem("theme");
-        if (saved === "light") {
-            document.body.classList.add("light");
-            setTheme("light");
+
+        if (saved) {
+            if (saved === "light") {
+                document.body.classList.add("light");
+                setTheme("light");
+            } else {
+                document.body.classList.remove("light");
+                setTheme("dark");
+            }
+        } else {
+            const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+            if (systemPrefersLight) {
+                document.body.classList.add("light");
+                setTheme("light");
+            } else {
+                document.body.classList.remove("light");
+                setTheme("dark");
+            }
         }
     }, []);
-
-    /* TOGGLE THEME */
-    const toggleTheme = () => {
-        if (theme === "light") {
-            document.body.classList.remove("light");
-            localStorage.setItem("theme", "dark");
-            setTheme("dark");
-        } else {
-            document.body.classList.add("light");
-            localStorage.setItem("theme", "light");
-            setTheme("light");
-        }
-    };
 
     return (
         <nav className="nav">

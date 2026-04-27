@@ -45,8 +45,15 @@ function NoticeStats() {
 
         try {
             const res = await fetch(
-                `${API_URL}/notices/count?category=${encodeURIComponent(category)}&year=${year}&month=${month}`,
-                { credentials: "include" }
+                `${API_URL}/notices/count`,
+                {
+                    credentials: "include",
+                    body: JSON.stringify({
+                        category,
+                        year,
+                        month
+                    })
+                }
             );
 
             const data = await res.json();

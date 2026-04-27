@@ -137,6 +137,7 @@ function AdminUserPanel({ isAdmin }) {
                             <input
                                 type="checkbox"
                                 checked={selected.includes(u.uuid)}
+                                disabled={u.username === "admin"}
                                 onChange={() => toggleSelect(u.uuid)}
                             />
 

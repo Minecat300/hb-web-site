@@ -72,7 +72,7 @@ export default function App() {
                             element={
                                 <RequireAuth user={user}>
                                     <RequireRole user={user} roles={["admin", "management"]}>
-                                        <ReviewNotice />
+                                        <ReviewNotice user={user} />
                                     </RequireRole>
                                 </RequireAuth>
                             }

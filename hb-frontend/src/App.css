@@ -1286,3 +1286,123 @@ select {
     flex: 1;
     min-width: 110px;
 }
+
+/* ========================= */
+/* 🌞 LIGHT MODE (ADD ONLY) */
+/* ========================= */
+
+body.light {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+body.light .app-layout {
+    background: #f8fafc;
+}
+
+/* CARDS */
+body.light .card,
+body.light .admin-card,
+body.light .notice-item,
+body.light .home-card,
+body.light .login-card,
+body.light .admin-top {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* INPUTS */
+body.light input,
+body.light select,
+body.light textarea {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+}
+
+body.light input::placeholder {
+    color: #64748b;
+}
+
+/* NAV */
+body.light .nav {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+body.light .nav-item {
+    color: #334155;
+}
+
+body.light .nav-item:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+body.light .nav-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+body.light .brand {
+    color: #2563eb;
+}
+
+/* USER PILL */
+body.light .user-pill {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+}
+
+/* BUTTONS */
+body.light .btn-gray {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+/* BADGES */
+body.light .badge {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+/* TEXT COLORS */
+body.light .small,
+body.light .notice-meta,
+body.light .user-email,
+body.light .stats-label {
+    color: #64748b;
+}
+
+/* NOTICE DESC */
+body.light .notice-desc {
+    color: #334155;
+}
+
+/* STATS BOX */
+body.light .stats-result {
+    background: #f1f5f9;
+}
+
+/* LOGIN */
+body.light .login-page {
+    background: #f1f5f9;
+}
+
+body.light .login-input {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+}
+
+/* SCROLLBAR */
+body.light ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+}
+
+body.light ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}

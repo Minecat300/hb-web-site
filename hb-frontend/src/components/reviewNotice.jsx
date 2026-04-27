@@ -39,8 +39,26 @@ function ReviewNotice() {
             const data = await res.json();
             if (!res.ok) throw new Error(data.error);
 
-            // optimistic-ish refresh
             fetchNotices();
+        } catch (err) {
+            alert(err.message);
+        }
+    };
+
+    const deleteNotice = async (id) => {
+        const ok = confirm("Delete this notice permanently?");
+        if (!ok) return;
+
+        try {
+            const res = await fetch(`${API_URL}/notice/${id}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error);
+
+            setNotices((prev) => prev.filter((n) => n.uuid !== id));
         } catch (err) {
             alert(err.message);
         }
@@ -64,13 +82,12 @@ function ReviewNotice() {
                             </span>
                         </div>
 
-                        <p className="notice-desc">
-                            {n.description}
-                        </p>
+                        <p className="notice-desc">{n.description}</p>
 
                         <div className="notice-meta">
                             <span>
-                                📌 {n.category} • 🕒 {new Date(n.created_at).toLocaleString()}
+                                📌 {n.category} • 🕒{" "}
+                                {new Date(n.created_at).toLocaleString()}
                             </span>
                         </div>
 
@@ -94,6 +111,13 @@ function ReviewNotice() {
                                 onClick={() => updateStatus(n.uuid, "archived")}
                             >
                                 Archive
+                            </button>
+
+                            <button
+                                className="btn-red"
+                                onClick={() => deleteNotice(n.uuid)}
+                            >
+                                Delete
                             </button>
                         </div>
                     </div>

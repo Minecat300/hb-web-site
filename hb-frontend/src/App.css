@@ -1275,3 +1275,14 @@ select {
         gap: 10px;
     }
 }
+
+.filter-row.wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-row.wrap select {
+    flex: 1;
+    min-width: 110px;
+}
